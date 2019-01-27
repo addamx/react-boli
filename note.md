@@ -10,4 +10,16 @@ yarn global add syncyarnlock // install syncyarnlock globally
 yarn upgrade // update dependencies, updates yarn.lock
 syncyarnlock -s -k // updates package.json with versions installed from yarn.lock
 yarn install // updates yarn.lock with current version constraint from package.json
+
+
+// babel upgrade
+// - https://juejin.im/post/5b87cab1e51d4538ac05dc54
+npx babel-upgrade --write
+// 或是安裝 babel-upgrade 在 global 並執行
+npm install babel-upgrade -g
+babel-upgrade --write
+
+
 ```
+
+
