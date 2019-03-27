@@ -1,0 +1,1 @@
+- [ ] nginx prevent cache sw.js (offline-first updateds)

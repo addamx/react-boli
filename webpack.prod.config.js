@@ -1,22 +1,22 @@
-'use strict'
+'use strict';
 
-const path = require("path")
-const webpack = require('webpack')
-const merge = require('webpack-merge')
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
 //pugin
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OfflinePlugin = require('offline-plugin');
 //config
-const base = require('./webpack.base.config')
-const baseConfig = base.webpackConfig
-const pathConfig = base.commonPath
-const pkg = require('./package.json')
-
+const base = require('./webpack.base.config');
+const baseConfig = base.webpackConfig;
+const pathConfig = base.commonPath;
+const pkg = require('./package.json');
 
 
 module.exports = merge(baseConfig, {
+  mode: 'production',
   entry: {
-    app: path.join(pathConfig.srcPath, "index.js"),
+    app: path.join(pathConfig.srcPath, 'main.js'),
     vendor: Object.keys(pkg.dependencies)
   },
   // output: {
@@ -25,41 +25,41 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        exclude: path.join(pathConfig.rootPath, 'node_modules'),
+        exclude: path.join(pathConfig.rootPath, 'node_modules')
       },
       {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader', 'less-loader']
         })
       },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader', 'sass-loader']
         })
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: [
             {
               loader: 'css-loader',
               options: {
-                importLoaders: 1		//告示@import来的css文件使用之前多少个loader;只对.css文件起效
+                importLoaders: 1 //告示@import来的css文件使用之前多少个loader;只对.css文件起效
               }
-            }, 
+            },
             'postcss-loader'
           ]
         })
-			}
+      }
     ]
-  } ,
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
@@ -74,6 +74,8 @@ module.exports = merge(baseConfig, {
       name: ['vendor', 'runtime'],
       filename: 'js/[name].[hash:5].js'
     }),
-    new ExtractTextPlugin('css/[name].[hash:5].css')
+    new ExtractTextPlugin('css/[name].[hash:5].css'),
+    // it's always better if OfflinePlugin is the last plugin added
+    new OfflinePlugin()
   ]
-})
+});

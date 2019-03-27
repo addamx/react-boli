@@ -14,6 +14,7 @@ const pathConfig = base.commonPath
 
 
 module.exports = merge(baseConfig, {
+  mode: 'development',
   devServer: {
     historyApiFallback: true, //-true:任意的 404 响应都可能需要被替代为 index.html
     hot: true,
@@ -35,13 +36,13 @@ module.exports = merge(baseConfig, {
       'eventsource-polyfill',
       'webpack-hot-middleware/client?reload=true',
       'webpack/hot/only-dev-server',
-      path.join(pathConfig.srcPath, "index.js")
+      path.join(pathConfig.srcPath, "main.js")
     ]
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loaders: ['babel-loader'],  //cacheDirectory缓存 loader 的执行结果
         exclude: path.join(pathConfig.rootPath, 'node_modules'),
       },
@@ -51,7 +52,18 @@ module.exports = merge(baseConfig, {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]--[local]-[hash:base64:5]'
+            }
+          },
+          'postcss-loader',
+          'sass-loader'
+        ]
       },
       {
 				test: /\.css$/,
@@ -75,9 +87,9 @@ module.exports = merge(baseConfig, {
     new webpack.HotModuleReplacementPlugin(), //模块热替换,如果不在dev-server模式下
     new webpack.NoEmitOnErrorsPlugin(), //跳过输出阶段。这样可以确保输出资源不会包含错误, 取代webpack 1 的 NoErrorsPlugin 插件。
     new BrowserSyncPlugin({
-      host: '127.0.0.1',
+      host: '0.0.0.0',
       port: 3300,
-      proxy: 'http://127.0.0.1:3300/',
+      proxy: 'http://0.0.0.0:3300/',
       logConnections: false,
       notify: false
     }, {

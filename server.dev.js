@@ -11,7 +11,7 @@ new WebpackDevServer(
   webpack(devConfig), devConfig.devServer
 ).listen(
   devConfig.devServer.port,
-  '127.0.0.1',
+  '0.0.0.0',
   function (err) {
     if (err) {
       console.log(err);

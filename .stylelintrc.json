@@ -1,6 +1,5 @@
 {
   "extends": "stylelint-config-standard",
-  "plugins": ["stylelint-no-browser-hacks/lib"],
   "rules": {
     "comment-empty-line-before": null,
     "function-linear-gradient-no-nonstandard-direction": null,
@@ -15,19 +14,6 @@
       }
     ],
     "number-leading-zero": "always",
-    "plugin/no-browser-hacks": [
-      true,
-      {
-        "browsers": [
-          "ie >= 9",
-          "edge >= 13",
-          "firefox >= 5",
-          "opera >= 12",
-          "safari >= 5",
-          "chrome >= 56"
-        ]
-      }
-    ],
     "property-no-unknown": null,
     "rule-empty-line-before": null,
     "selector-pseudo-element-colon-notation": null,
@@ -46,7 +32,5 @@
     ]
   },
   "ignoreFiles": [
-    "assets/vendor/**/*.css",
-    "tests/Drupal/Tests/Core/Asset/css_test_files/**/*.css"
   ]
 }

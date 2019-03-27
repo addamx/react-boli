@@ -27,6 +27,9 @@ module.exports = {
       publicPath: '/'
     },
     resolve: {
+      // Allow absolute paths in imports, e.g. import Button from 'components/Button'
+      // Keep in sync with .flowconfig and .eslintrc
+      modules: ['node_modules', 'src'],
       extensions: ['.js', '.json', '.jsx', '.css', '.scss', 'less'],
       alias: {
         //'vue$': 'vue/dist/vue.esm.js',  //使用vue的完整版而非运行版
