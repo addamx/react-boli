@@ -1,18 +1,21 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import injectReducer from 'store/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import reducer from './reducer';
 import saga from './saga';
-import {changeUserName, reposLoad} from './actions';
-import {makeSelectUsername, makeSelectRepos} from './selectors';
+import { changeUserName, reposLoad } from './actions';
+import { makeSelectUsername, makeSelectRepos } from './selectors';
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: evt => dispatch(changeUserName(evt.target.value)),
-    reposLoad: () => dispatch(reposLoad('addamx')),
+    onChangeUsername: evt => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(changeUserName(evt.target.value));
+      dispatch(reposLoad(name));
+    }
   };
 }
 
@@ -40,16 +43,15 @@ const withSaga = injectSaga({ key: 'home', saga });
 @withReducer
 @withConnect
 class HomePage extends React.Component {
-
-  componentDidMount() {
-    this.props.reposLoad();
-  }
-
-  render () {
+  render() {
     return (
       <div className="homepage">
-        {JSON.stringify(this.props.githubData)}
+        <input
+          value={this.props.username}
+          onChange={this.props.onChangeUsername}
+        />
         <span>{this.props.username}</span>
+        <pre>{JSON.stringify(this.props.githubData)}</pre>
       </div>
     );
   }

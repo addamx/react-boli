@@ -1,3 +1,4 @@
-export const CHANGE_NAME = 'home/change-name';
-export const LOAD_REPOS = 'home/load-repos';
-export const LOAD_ERROR = 'home/load-error';
+export const CHANGE_NAME = 'HOME/CHANGE_NAME';
+export const LOAD_REPOS = 'HOME/LOAD_REPOS';
+export const LOAD_REPOS_SUCCESS = 'HOME/LOAD_REPOS_SUCCESS';
+export const LOAD_REPOS_ERROR = 'HOME/LOAD_REPOS_ERROR';

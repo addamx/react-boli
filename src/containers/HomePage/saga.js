@@ -1,20 +1,23 @@
-import {call, put, select, takeLatest} from 'redux-saga/effects';
+import { call, put, select, takeLatest, delay } from 'redux-saga/effects';
 
 import * as type from './constants';
-import {reposLoad, repoLoadingError} from './actions';
-import {makeSelectUsername} from './selectors';
+import { repoLoadError, repoLoadSuccess } from './actions';
+import { makeSelectUsername } from './selectors';
 import request from 'utils/request';
 
 export function* getRepos() {
-  // const username = yield select(makeSelectUsername());
-  const username = 'addamx';
+  const username = yield select(makeSelectUsername());
   const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
 
   try {
+    yield delay(500);
     const repos = yield call(request, requestURL);
-    // yield put(reposLoaded(repos, username));
-  } catch(err) {
-    yield put(repoLoadingError(err));
+    if (!Array.isArray(repos)) {
+      throw new Error('something is wrong');
+    }
+    yield put(repoLoadSuccess(repos));
+  } catch (err) {
+    yield put(repoLoadError(err));
   }
 }
 

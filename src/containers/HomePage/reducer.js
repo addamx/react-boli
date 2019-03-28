@@ -1,21 +1,23 @@
-import {fromJS} from 'immutable';
-import {handleActions} from 'redux-actions';
+import { fromJS } from 'immutable';
+import { handleActions } from 'redux-actions';
 import * as type from './constants';
 
 export const initialState = fromJS({
   username: '',
-  githubData: ''
+  githubData: '',
+  error: ''
 });
 
 export default handleActions(
   {
-    [type.CHANGE_NAME]: state => {
-      return state.set('username', 'Addams');
-    },
-    [type.LOAD_REPOS]: (state, action)=> {
-      console.log(action);
-      return state.set('githubData', action.payload);
-    }
+    [type.CHANGE_NAME]: (state, action) =>
+      state.set('username', action.payload),
+
+    [type.LOAD_REPOS_SUCCESS]: (state, action) =>
+      state.set('githubData', action.payload),
+
+    [type.LOAD_REPOS_ERROR]: (state, action) =>
+      state.set('error', action.payload)
   },
   initialState
 );

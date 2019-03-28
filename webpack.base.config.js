@@ -1,21 +1,21 @@
-'use strict'
+'use strict';
 
 const path = require('path');
 
 //webpack
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 //path config
-const rootPath = path.resolve(__dirname, '.');     // 项目根目录
-const srcPath = path.join(rootPath, 'src');             // 开发源码目录
-const env = process.env.NODE_ENV.trim();            // 当前环境
+const rootPath = path.resolve(__dirname, '.'); // 项目根目录
+const srcPath = path.join(rootPath, 'src'); // 开发源码目录
+const env = process.env.NODE_ENV.trim(); // 当前环境
 
 const commonPath = {
   rootPath: rootPath,
   srcPath: srcPath,
-  dist: path.join(rootPath, 'dist'),              // build 后输出目录
-  indexHTML: path.join(srcPath, 'index.html'),        // 入口模板页面
-  staticDir: path.join(rootPath, 'static')        // 不需编译的静态资源
+  dist: path.join(rootPath, 'dist'), // build 后输出目录
+  indexHTML: path.join(srcPath, 'index.html'), // 入口模板页面
+  staticDir: path.join(rootPath, 'static') // 不需编译的静态资源
 };
 
 module.exports = {
@@ -33,7 +33,8 @@ module.exports = {
       extensions: ['.js', '.json', '.jsx', '.css', '.scss', 'less'],
       alias: {
         //'vue$': 'vue/dist/vue.esm.js',  //使用vue的完整版而非运行版
-        '@': path.resolve('src')
+        // '@': path.resolve('src'),
+        connect: require.resolve('src/utils/connect')
       }
     },
     module: {
@@ -53,7 +54,7 @@ module.exports = {
         {
           test: /\.(mp3|webm|ogg)/,
           use: {
-            loader: 'file-loader',
+            loader: 'file-loader'
           }
         },
         {
@@ -85,4 +86,4 @@ module.exports = {
       })
     ]
   }
-}
+};
