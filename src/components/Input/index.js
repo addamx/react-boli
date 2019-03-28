@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './input.scss';
-import { cn } from '../../util/funcs';
+import { cn } from 'utils/funcs';
 
 const Input = ({ className, value, inputRef }) => {
   return (
@@ -11,10 +11,10 @@ const Input = ({ className, value, inputRef }) => {
       ref={inputRef}
     />
   );
-}
+};
 
 Input.defaultProps = {
   value: 'type here...'
-}
+};
 
 export default Input;

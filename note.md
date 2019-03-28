@@ -35,4 +35,7 @@ babel-upgrade --write
 
 ```
 
+```
+git commit --no-verify
 
+```

@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './button.scss'
-import { cn } from '../../util';
+import styles from './button.scss';
+import { cn } from 'utils/funcs';
 
-const Button = ({ className, children, onClick }) => (
+const Button = ({className, children, onClick }) => (
   <button
     type="button"
     className={cn(styles.normal, className)}
@@ -13,4 +13,3 @@ const Button = ({ className, children, onClick }) => (
 );
 
 export default Button;
-

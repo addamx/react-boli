@@ -1,9 +1,8 @@
-'use strict'
+'use strict';
 
 const webpack = require('webpack');
-const path = require("path");
 const WebpackDevServer = require('webpack-dev-server');
-const proxy = require('http-proxy-middleware');
+// const proxy = require('http-proxy-middleware');
 //config
 const devConfig = require('./webpack.dev.config');
 

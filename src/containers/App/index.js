@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import styles from './app.scss';
-import TodoList from 'components/TodoList';
+import styles from './_app.scss';
+import { hot } from 'react-hot-loader/root';
+import Router from 'router';
+import { Helmet } from 'react-helmet';
+import {Link} from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <h2 className={styles.header}>Todo List Demo</h2>
-        <div className={styles.content}>
-          <TodoList />
-        </div>
+        <Helmet
+          titleTemplate="%s - React Best Kit"
+          defaultTitle="React Best Kit"
+        >
+          <meta name="description" content="A React application" />
+        </Helmet>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/404">404</Link></li>
+        </ul>
+        <Router />
       </div>
     );
   }
 }
 
-export default App;
+export default hot(App);

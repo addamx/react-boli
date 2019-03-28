@@ -12,9 +12,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router/immutable';
 import history from 'utils/history';
-import configureStore from './configureStore';
+import configureStore from './store/configureStore';
 import App from './containers/App';
-import { HotContainer } from 'react-hot-loader';
 
 // Create redux store with history
 const initialState = {};
@@ -25,9 +24,7 @@ const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <HotContainer>
-          <App />
-        </HotContainer>
+        <App />
       </ConnectedRouter>
     </Provider>,
     MOUNT_NODE
@@ -36,14 +33,12 @@ const render = () => {
 
 if (module.hot) {
   module.hot.accept('containers/App', () => {
-    // let nextApp = require('containers/App').default;
-    // render(nextApp);
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
     render();
   });
 }
 
-render(App);
+render();
 
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
