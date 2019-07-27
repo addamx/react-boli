@@ -26,7 +26,7 @@ module.exports = merge(baseConfig, {
     // noInfo: false,  //-隐藏每次启动或保存之后显示的bundle信息
     contentBase: pathConfig.publicPath,
     port: 3300,
-    stats: { colors: true }, ////- 等同于`webpack --colors`,
+    stats: { colors: true }, //- 等同于`webpack --colors`,
     // proxy: {
     //   '/api/*': {
     //     target: 'https://api.douban.com/v2/',
