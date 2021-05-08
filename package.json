@@ -99,7 +99,7 @@
     "connected-react-router": "^6.3.2",
     "hoist-non-react-statics": "^3.3.0",
     "loadable-components": "^2.2.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-helmet": "^5.2.0",
